@@ -1,0 +1,32 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: userservice
+  profiles:
+    active: dev
+#mybatis&通用mapper相关配置
+mybatis-plus:
+  type-aliases-package: com.example.demo.model.entity
+  # Maven多模块项目的扫描路径需以classpath*: 开头（即加载多个jar包下的XML文件）
+  mapper-locations: classpath:mapper/*.xml
+
+mapper:
+  not-empty: false
+  identity: MYSQL
+
+#swagger文档相关配置
+swagger:
+  enabled: true
+  title: 用户服务
+  description: 用户服务相关接口说明
+  version: 1.0
+  base-package: com.example.demo.controller
+  authorization:
+    key-name: Authorization
+
+#打印mybatis动态生成的sql语句
+logging:
+  level:
+    com.example.demo.mapper: debug
+    org.springframework.data.mongodb.core: DEBUG
