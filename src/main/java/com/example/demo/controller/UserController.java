@@ -6,6 +6,7 @@ import com.example.demo.model.entity.Stu;
 import com.example.demo.redis.RedisTest;
 import com.example.demo.service.UserService;
 import com.example.demo.util.RedisUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.*;
 
 /**
@@ -68,23 +71,24 @@ public class UserController {
 
 
     @PostMapping("/selStu/{Id}")
-    public Stu selStu(@PathVariable("Id") String id) {
+    public Stu selStu(@PathVariable("Id") String Id) {
         //先查redis  key是否存在
-        if (redisUtil.hasKey("Stu:" + id)) {
-            String valueStr = String.valueOf(redisUtil.get("Stu:" + id));
-            if (valueStr == null) {
+        boolean result = redisUtil.hasKey("Stu:" + Id);
+        if (result) {
+            Object object = redisUtil.get("Stu:" + Id);
+            if (object == null) {
                 return null;
             }
-            return JSON.parseObject(valueStr,Stu.class);
+            return JSON.parseObject(JSON.parse(object.toString()).toString(), Stu.class);
         }
         //没有再查数据库
-        Stu stu1 = userMapper.selectById(id);
+        Stu stu1 = userMapper.selectById(Id);
         //数据库为空给id的值为空
         if (stu1 == null) {
-            redisTest.setValueNull("Stu:" + id);
+            redisTest.setValueNull("Stu:" + Id);
             return stu1;
         }
-        redisTest.setRandomTime("Stu:" + id, JSON.toJSONString(stu1));
+        redisTest.setRandomTime("Stu:" + Id, JSON.toJSONString(stu1));
         return stu1;
     }
 

@@ -2,7 +2,7 @@ spring:
   datasource:
     druid:
       url: jdbc:mysql://localhost:3306/lkd_user?useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=CONVERT_TO_NULL&allowPublicKeyRetrieval=true
-        username: root
+      username: root
       password:
       #最大连接池数量
       max-active: 20
