@@ -11,75 +11,61 @@ import java.util.Date;
  * @createDate: 2023/6/6 17:22
  */
 public class TestVo {
+
     /**
-     * 时间
+     * 审批人
      */
-    @LogParam(title = "运行记事时间")
-    @ApiModelProperty(value = "运行记事时间", required = false )
+    @LogParam(title = "审批人")
+    @ApiModelProperty(value = "审批人", required = false )
+    private Long singleApprovalUid;
+
+    /**
+     * 审批时间
+     */
+    @LogParam(title = "审批时间")
+    @ApiModelProperty(value = "审批时间", required = false )
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date runRecordTime;
+    private Date approvalTime;
 
     /**
-     * 内容
+     * 审批人公司
      */
-    @LogParam(title = "内容")
-    @ApiModelProperty(value = "内容", required = false )
-    private String content;
+    @LogParam(title = "审批人公司")
+    @ApiModelProperty(value = "审批人公司", required = false )
+    private Long approvalDepid;
 
     /**
-     * 巡视区域
+     * 审批意见
      */
-    @LogParam(title = "巡视区域")
-    @ApiModelProperty(value = "巡视区域", required = false )
-    private String patrolArea;
+    @LogParam(title = "审批意见")
+    @ApiModelProperty(value = "审批意见", required = false )
+    private String approvalOpinion;
 
     /**
-     * 工作票情况时间
+     * 审批是否结束
      */
-    @LogParam(title = "工作票情况时间")
-    @ApiModelProperty(value = "工作票情况时间", required = false )
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date workTicketTime;
+    @LogParam(title = "审批是否结束")
+    @ApiModelProperty(value = "审批是否结束", required = false )
+    private String yesOrNoOver;
 
     /**
-     * 工作票编号
+     * 下一办理人
      */
-    @LogParam(title = "工作票编号")
-    @ApiModelProperty(value = "工作票编号", required = false )
-    private String workTicketCode;
+    @LogParam(title = "下一办理人")
+    @ApiModelProperty(value = "下一办理人", required = false )
+    private Long nextProcessedBy;
 
     /**
-     * 工作票内容
+     * 是否同意
      */
-    @LogParam(title = "工作票内容")
-    @ApiModelProperty(value = "工作票内容", required = false )
-    private String workTicketContent;
-
-    /**
-     * 巡视结果
-     */
-    @LogParam(title = "巡视结果")
-    @ApiModelProperty(value = "巡视结果", required = false )
-    private String inspectionResults;
-
-    /**
-     * 巡查人
-     */
-    @LogParam(title = "巡查人")
-    @ApiModelProperty(value = "巡查人", required = false )
-    private String patrolUseid;
+    @LogParam(title = "是否同意")
+    @ApiModelProperty(value = "是否同意", required = false )
+    private String agreeOrNot;
 
     /**
      * 主表id
      */
     @LogParam(title = "主表id")
     @ApiModelProperty(value = "主表id", required = false )
-    private Integer powerSupplyId;
-
-    /**
-     * 类型 1运行记事2巡检记录3工作票情况
-     */
-    @LogParam(title = "类型 1运行记事2巡检记录3工作票情况")
-    @ApiModelProperty(value = "类型 1运行记事2巡检记录3工作票情况", required = false )
-    private Integer type;
+    private Long responseId;
 }
